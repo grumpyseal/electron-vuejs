@@ -1,6 +1,6 @@
 {
   "name": "electron-vuejs",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Electron and vue.js starter app using Babel/ES6",
   "main": "dist/main.js",
   "directories": {
@@ -8,9 +8,13 @@
   },
   "scripts": {
     "lint": "./node_modules/.bin/eslint src",
+    "clean":"rm -rf dist && npm cache clean",
     "test": "./node_modules/.bin/mocha --compilers js:babel-core/register -R spec test/",
+    "prestart": "npm run build -s",
     "start": "./node_modules/.bin/electron dist/main.js",
-    "build": "./node_modules/.bin/babel src --out-dir dist --source-maps"
+    "build": "./node_modules/.bin/babel src --out-dir dist --source-maps",
+    "postbuild": "npm run test",
+    "watch": "watch 'npm start' src"
   },
   "repository": {
     "type": "git",
@@ -35,7 +39,8 @@
     "electron-prebuilt": "^0.36.9",
     "eslint": "^2.2.0",
     "mocha": "^2.4.5",
-    "supertest": "^1.2.0"
+    "supertest": "^1.2.0",
+    "watch":"0.17.x"
   },
   "dependencies": {
     "bootstrap": "^3.3.6",
